@@ -252,23 +252,13 @@
                 fwCtx.beginPath(); fwCtx.moveTo(this.x, this.y); fwCtx.lineTo(this.x, this.y + 10); fwCtx.stroke();
             }
             explode() {
-    const originX = this.x - fwCx;
-    const originY = this.y - fwCy;
-    const originZ = fwRandom(-80, 80);
-
-    for (let i = 0; i < FW_CONFIG.particleCount; i++) {
-        const hue = Math.random() * 360;       
-        const lightness = fwRandom(55, 70);    
-        const color = `hsl(${hue}, 100%, ${lightness}%)`;
-
-        const p = new Particle3D(originX, originY, originZ, color);
-
-        p.decay = fwRandom(0.03, 0.055);       
-        p.size = fwRandom(0.8, 1.5);            
-
-        fwParticles.push(p);
-    }
-}
+                const originX = this.x - fwCx; const originY = this.y - fwCy; const originZ = fwRandom(-100, 100);
+                const hueBase = fwRandom(40, 50);
+                for (let i = 0; i < FW_CONFIG.particleCount; i++) {
+                    const lightness = fwRandom(50, 80); const color = `hsl(${hueBase}, 100%, ${lightness}%)`;
+                    fwParticles.push(new Particle3D(originX, originY, originZ, color));
+                }
+            }
         }
 
         function loopFireworks() {
