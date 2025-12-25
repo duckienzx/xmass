@@ -133,7 +133,7 @@
     </div>
 
     <video id="input_video" style="display:none; transform: scaleX(-1)" playsinline></video>
-    <audio id="bg-music" src="./audio.mp3" loop preload="auto" playsinline></audio>
+    <audio id="bg-music" src="./audio.mp3" loop></audio>
 
     <script type="module">
         import * as THREE from 'three';
@@ -339,18 +339,12 @@
             const audio = document.getElementById('bg-music');
             
             overlay.addEventListener('click', () => {
-  overlay.style.opacity = 0;
-  setTimeout(() => overlay.remove(), 500);
+                overlay.style.opacity = 0;
+                setTimeout(() => overlay.remove(), 500);
+                initTouchControls(); 
+                audio.play().catch(e => { console.log("Audio Error:", e); });
+            });
 
-  const audio = document.getElementById('bg-music');
-  audio.volume = 0.4;
-
-  audio.play().then(() => {
-    console.log('nhạc đang phát');
-  }).catch(err => {
-    console.log('bị chặn:', err);
-  });
-});
             const container = document.getElementById('canvas-container');
             scene = new THREE.Scene();
             camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 1000);
