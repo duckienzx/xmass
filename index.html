@@ -338,12 +338,23 @@
             const overlay = document.getElementById('start-overlay');
             const audio = document.getElementById('bg-music');
             
-            overlay.addEventListener('click', () => {
-                overlay.style.opacity = 0;
-                setTimeout(() => overlay.remove(), 500);
-                initTouchControls(); 
-                audio.play().catch(e => { console.log("Audio Error:", e); });
-            });
+            overlay.addEventListener('click', async () => {
+    overlay.style.opacity = 0;
+    setTimeout(() => overlay.remove(), 500);
+
+    initTouchControls();
+
+    const audio = document.getElementById('bg-music');
+    audio.src = './audio.mp3';   // gán src sau khi click
+    audio.volume = 0.5;
+
+    try {
+        await audio.play();
+        console.log('music playing');
+    } catch (err) {
+        console.log('audio blocked:', err);
+    }
+});
 
             const container = document.getElementById('canvas-container');
             scene = new THREE.Scene();
